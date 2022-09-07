@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBTHUCTAPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tbl_BBM_SMART_HRM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KhoiCode" Type="nvarchar" MaxLength="150" />
+          <Property Name="KhoiName" Type="nvarchar" MaxLength="250" />
+          <Property Name="BoPhanCode" Type="nvarchar" MaxLength="150" />
+          <Property Name="BoPhanName" Type="nvarchar" MaxLength="250" />
+          <Property Name="PhongBanCode" Type="nvarchar" MaxLength="250" />
+          <Property Name="PhongBanName" Type="nvarchar" MaxLength="250" />
+          <Property Name="CapBac" Type="nvarchar" MaxLength="250" />
+          <Property Name="ChucDanh" Type="nvarchar" MaxLength="250" />
+          <Property Name="MaCongViec" Type="nvarchar" MaxLength="150" />
+          <Property Name="TenCongViec" Type="nvarchar" MaxLength="250" />
+          <Property Name="TanSuatThucHien" Type="int" />
+          <Property Name="ThoiLuongThucHien" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TongThoiLuongThucHien" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MaNhanVien" Type="nvarchar" MaxLength="150" />
+          <Property Name="TenNhanVien" Type="nvarchar" MaxLength="250" />
+          <Property Name="TinhTrangHD" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="tbl_Bill">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoVaTen" Type="nvarchar" MaxLength="50" />
+          <Property Name="SoDienThoai" Type="nvarchar" MaxLength="15" />
+          <Property Name="TenSanPham" Type="nvarchar" MaxLength="50" />
+          <Property Name="NgayMua" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'DBTHUCTAP.dbo.tbl_khachhang' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="tbl_khachhang">
+          <Property Name="HoTen" Type="nvarchar" MaxLength="255" />
+          <Property Name="SoDienThoai" Type="nvarchar" MaxLength="20" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="500" />
+          <Property Name="DonHang" Type="nvarchar" MaxLength="500" />
+          <Property Name="TongTien" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NgayMua" Type="datetime" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBTHUCTAP.dbo.tbl_moTaCongViec' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tbl_moTaCongViec">
+          <Key>
+            <PropertyRef Name="MaCV" />
+          </Key>
+          <Property Name="MaCV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenCV" Type="nvarchar" MaxLength="255" />
+          <Property Name="TanSuatCongViec" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ThoiLuongThucHien" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Khoi" Type="nvarchar" MaxLength="255" />
+          <Property Name="PhongBan" Type="nvarchar" MaxLength="255" />
+          <Property Name="BoPhan" Type="nvarchar" MaxLength="255" />
+          <Property Name="CapBac" Type="nvarchar" MaxLength="255" />
+          <Property Name="ChucDanh" Type="nvarchar" MaxLength="255" />
+          <Property Name="MaNv" Type="nvarchar" MaxLength="255" />
+          <Property Name="TenNv" Type="nvarchar" MaxLength="255" />
+          <Property Name="TinhTrangHoatDong" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mien" Type="nvarchar" MaxLength="255" />
+          <Property Name="MaCHBP" Type="nvarchar" MaxLength="255" />
+          <Property Name="TenCHBP" Type="nvarchar" MaxLength="255" />
+          <Property Name="TongThoiGian" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBTHUCTAP.dbo.tbl_potong' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tbl_potong">
+          <Key>
+            <PropertyRef Name="POTongMienBac" />
+            <PropertyRef Name="POTongMienNam" />
+            <PropertyRef Name="POTongMienBacInt" />
+            <PropertyRef Name="POTongMienNamInt" />
+            <PropertyRef Name="POTongToanQuoc" />
+            <PropertyRef Name="POTongToanQuocInt" />
+            <PropertyRef Name="GiaTriPOTongToanQuoc" />
+            <PropertyRef Name="POQuahan" />
+            <PropertyRef Name="TonKho" />
+          </Key>
+          <Property Name="Function" Type="nvarchar" MaxLength="100" />
+          <Property Name="FFunction" Type="nvarchar" MaxLength="503" />
+          <Property Name="MuaVu" Type="nvarchar" MaxLength="50" />
+          <Property Name="hisdate" Type="nvarchar" MaxLength="4000" />
+          <Property Name="POTongMienBac" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="POTongMienNam" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="POTongMienBacInt" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="POTongMienNamInt" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="POTongToanQuoc" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="POTongToanQuocInt" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="GiaTriPOTongToanQuoc" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="POQuahan" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="TonKho" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="Intransit" Type="nvarchar" MaxLength="4000" />
+          <Property Name="POTongCR" Type="nvarchar" MaxLength="4000" />
+          <Property Name="DatThem" Type="nvarchar" MaxLength="4000" />
+          <Property Name="NgayTonKho" Type="nvarchar" MaxLength="100" />
+          <Property Name="sumPOTongMienBac" Type="nvarchar" MaxLength="4000" />
+          <Property Name="sumPOTongMienNam" Type="nvarchar" MaxLength="4000" />
+          <Property Name="sumPOTongToanQuoc" Type="nvarchar" MaxLength="4000" />
+          <Property Name="sumGiaTriPOTongToanQuoc" Type="nvarchar" MaxLength="4000" />
+          <Property Name="sumTonKho" Type="nvarchar" MaxLength="4000" />
+          <Property Name="sumIntransit" Type="nvarchar" MaxLength="4000" />
+          <Property Name="sumPOTongCR" Type="nvarchar" MaxLength="4000" />
+          <Property Name="sumDatThem" Type="nvarchar" MaxLength="4000" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBTHUCTAP.dbo.tbl_tmp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tbl_tmp">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityContainer Name="DBTHUCTAPModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_BBM_SMART_HRM" EntityType="Self.tbl_BBM_SMART_HRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Bill" EntityType="Self.tbl_Bill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_moTaCongViec" EntityType="Self.tbl_moTaCongViec" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tbl_moTaCongViec].[MaCV] AS [MaCV], 
+    [tbl_moTaCongViec].[TenCV] AS [TenCV], 
+    [tbl_moTaCongViec].[TanSuatCongViec] AS [TanSuatCongViec], 
+    [tbl_moTaCongViec].[ThoiLuongThucHien] AS [ThoiLuongThucHien], 
+    [tbl_moTaCongViec].[Khoi] AS [Khoi], 
+    [tbl_moTaCongViec].[PhongBan] AS [PhongBan], 
+    [tbl_moTaCongViec].[BoPhan] AS [BoPhan], 
+    [tbl_moTaCongViec].[CapBac] AS [CapBac], 
+    [tbl_moTaCongViec].[ChucDanh] AS [ChucDanh], 
+    [tbl_moTaCongViec].[MaNv] AS [MaNv], 
+    [tbl_moTaCongViec].[TenNv] AS [TenNv], 
+    [tbl_moTaCongViec].[TinhTrangHoatDong] AS [TinhTrangHoatDong], 
+    [tbl_moTaCongViec].[Mien] AS [Mien], 
+    [tbl_moTaCongViec].[MaCHBP] AS [MaCHBP], 
+    [tbl_moTaCongViec].[TenCHBP] AS [TenCHBP], 
+    [tbl_moTaCongViec].[TongThoiGian] AS [TongThoiGian]
+    FROM [dbo].[tbl_moTaCongViec] AS [tbl_moTaCongViec]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tbl_potong" EntityType="Self.tbl_potong" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tbl_potong].[Function] AS [Function], 
+    [tbl_potong].[FFunction] AS [FFunction], 
+    [tbl_potong].[MuaVu] AS [MuaVu], 
+    [tbl_potong].[hisdate] AS [hisdate], 
+    [tbl_potong].[POTongMienBac] AS [POTongMienBac], 
+    [tbl_potong].[POTongMienNam] AS [POTongMienNam], 
+    [tbl_potong].[POTongMienBacInt] AS [POTongMienBacInt], 
+    [tbl_potong].[POTongMienNamInt] AS [POTongMienNamInt], 
+    [tbl_potong].[POTongToanQuoc] AS [POTongToanQuoc], 
+    [tbl_potong].[POTongToanQuocInt] AS [POTongToanQuocInt], 
+    [tbl_potong].[GiaTriPOTongToanQuoc] AS [GiaTriPOTongToanQuoc], 
+    [tbl_potong].[POQuahan] AS [POQuahan], 
+    [tbl_potong].[TonKho] AS [TonKho], 
+    [tbl_potong].[Intransit] AS [Intransit], 
+    [tbl_potong].[POTongCR] AS [POTongCR], 
+    [tbl_potong].[DatThem] AS [DatThem], 
+    [tbl_potong].[NgayTonKho] AS [NgayTonKho], 
+    [tbl_potong].[sumPOTongMienBac] AS [sumPOTongMienBac], 
+    [tbl_potong].[sumPOTongMienNam] AS [sumPOTongMienNam], 
+    [tbl_potong].[sumPOTongToanQuoc] AS [sumPOTongToanQuoc], 
+    [tbl_potong].[sumGiaTriPOTongToanQuoc] AS [sumGiaTriPOTongToanQuoc], 
+    [tbl_potong].[sumTonKho] AS [sumTonKho], 
+    [tbl_potong].[sumIntransit] AS [sumIntransit], 
+    [tbl_potong].[sumPOTongCR] AS [sumPOTongCR], 
+    [tbl_potong].[sumDatThem] AS [sumDatThem]
+    FROM [dbo].[tbl_potong] AS [tbl_potong]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tbl_tmp" EntityType="Self.tbl_tmp" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tbl_tmp].[ID] AS [ID], 
+    [tbl_tmp].[Code] AS [Code], 
+    [tbl_tmp].[Name] AS [Name]
+    FROM [dbo].[tbl_tmp] AS [tbl_tmp]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBTHUCTAPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tbl_BBM_SMART_HRM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KhoiCode" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="KhoiName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="BoPhanCode" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="BoPhanName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PhongBanCode" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PhongBanName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CapBac" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ChucDanh" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="MaCongViec" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="TenCongViec" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TanSuatThucHien" Type="Int32" />
+          <Property Name="ThoiLuongThucHien" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TongThoiLuongThucHien" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MaNhanVien" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="TenNhanVien" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TinhTrangHD" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_Bill">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoVaTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SoDienThoai" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TenSanPham" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgayMua" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tbl_moTaCongViec">
+          <Key>
+            <PropertyRef Name="MaCV" />
+          </Key>
+          <Property Name="MaCV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenCV" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TanSuatCongViec" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ThoiLuongThucHien" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Khoi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PhongBan" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BoPhan" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CapBac" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ChucDanh" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MaNv" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TenNv" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TinhTrangHoatDong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mien" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MaCHBP" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TenCHBP" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TongThoiGian" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tbl_potong">
+          <Key>
+            <PropertyRef Name="POTongMienBac" />
+            <PropertyRef Name="POTongMienNam" />
+            <PropertyRef Name="POTongMienBacInt" />
+            <PropertyRef Name="POTongMienNamInt" />
+            <PropertyRef Name="POTongToanQuoc" />
+            <PropertyRef Name="POTongToanQuocInt" />
+            <PropertyRef Name="GiaTriPOTongToanQuoc" />
+            <PropertyRef Name="POQuahan" />
+            <PropertyRef Name="TonKho" />
+          </Key>
+          <Property Name="Function" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FFunction" Type="String" MaxLength="503" FixedLength="false" Unicode="true" />
+          <Property Name="MuaVu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hisdate" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="POTongMienBac" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="POTongMienNam" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="POTongMienBacInt" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="POTongMienNamInt" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="POTongToanQuoc" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="POTongToanQuocInt" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GiaTriPOTongToanQuoc" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="POQuahan" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TonKho" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Intransit" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="POTongCR" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="DatThem" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTonKho" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="sumPOTongMienBac" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="sumPOTongMienNam" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="sumPOTongToanQuoc" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="sumGiaTriPOTongToanQuoc" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="sumTonKho" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="sumIntransit" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="sumPOTongCR" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="sumDatThem" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_tmp">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="DBTHUCTAP" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tbl_BBM_SMART_HRM" EntityType="Self.tbl_BBM_SMART_HRM" />
+          <EntitySet Name="tbl_Bill" EntityType="Self.tbl_Bill" />
+          <EntitySet Name="tbl_moTaCongViec" EntityType="Self.tbl_moTaCongViec" />
+          <EntitySet Name="tbl_potong" EntityType="Self.tbl_potong" />
+          <EntitySet Name="tbl_tmp" EntityType="Self.tbl_tmp" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBTHUCTAPModelStoreContainer" CdmEntityContainer="DBTHUCTAP">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DBTHUCTAPModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_BBM_SMART_HRM">
+            <EntityTypeMapping TypeName="DBTHUCTAPModel.tbl_BBM_SMART_HRM">
+              <MappingFragment StoreEntitySet="tbl_BBM_SMART_HRM">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KhoiCode" ColumnName="KhoiCode" />
+                <ScalarProperty Name="KhoiName" ColumnName="KhoiName" />
+                <ScalarProperty Name="BoPhanCode" ColumnName="BoPhanCode" />
+                <ScalarProperty Name="BoPhanName" ColumnName="BoPhanName" />
+                <ScalarProperty Name="PhongBanCode" ColumnName="PhongBanCode" />
+                <ScalarProperty Name="PhongBanName" ColumnName="PhongBanName" />
+                <ScalarProperty Name="CapBac" ColumnName="CapBac" />
+                <ScalarProperty Name="ChucDanh" ColumnName="ChucDanh" />
+                <ScalarProperty Name="MaCongViec" ColumnName="MaCongViec" />
+                <ScalarProperty Name="TenCongViec" ColumnName="TenCongViec" />
+                <ScalarProperty Name="TanSuatThucHien" ColumnName="TanSuatThucHien" />
+                <ScalarProperty Name="ThoiLuongThucHien" ColumnName="ThoiLuongThucHien" />
+                <ScalarProperty Name="TongThoiLuongThucHien" ColumnName="TongThoiLuongThucHien" />
+                <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+                <ScalarProperty Name="TenNhanVien" ColumnName="TenNhanVien" />
+                <ScalarProperty Name="TinhTrangHD" ColumnName="TinhTrangHD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Bill">
+            <EntityTypeMapping TypeName="DBTHUCTAPModel.tbl_Bill">
+              <MappingFragment StoreEntitySet="tbl_Bill">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HoVaTen" ColumnName="HoVaTen" />
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+                <ScalarProperty Name="TenSanPham" ColumnName="TenSanPham" />
+                <ScalarProperty Name="NgayMua" ColumnName="NgayMua" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_moTaCongViec">
+            <EntityTypeMapping TypeName="DBTHUCTAPModel.tbl_moTaCongViec">
+              <MappingFragment StoreEntitySet="tbl_moTaCongViec">
+                <ScalarProperty Name="MaCV" ColumnName="MaCV" />
+                <ScalarProperty Name="TenCV" ColumnName="TenCV" />
+                <ScalarProperty Name="TanSuatCongViec" ColumnName="TanSuatCongViec" />
+                <ScalarProperty Name="ThoiLuongThucHien" ColumnName="ThoiLuongThucHien" />
+                <ScalarProperty Name="Khoi" ColumnName="Khoi" />
+                <ScalarProperty Name="PhongBan" ColumnName="PhongBan" />
+                <ScalarProperty Name="BoPhan" ColumnName="BoPhan" />
+                <ScalarProperty Name="CapBac" ColumnName="CapBac" />
+                <ScalarProperty Name="ChucDanh" ColumnName="ChucDanh" />
+                <ScalarProperty Name="MaNv" ColumnName="MaNv" />
+                <ScalarProperty Name="TenNv" ColumnName="TenNv" />
+                <ScalarProperty Name="TinhTrangHoatDong" ColumnName="TinhTrangHoatDong" />
+                <ScalarProperty Name="Mien" ColumnName="Mien" />
+                <ScalarProperty Name="MaCHBP" ColumnName="MaCHBP" />
+                <ScalarProperty Name="TenCHBP" ColumnName="TenCHBP" />
+                <ScalarProperty Name="TongThoiGian" ColumnName="TongThoiGian" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_potong">
+            <EntityTypeMapping TypeName="DBTHUCTAPModel.tbl_potong">
+              <MappingFragment StoreEntitySet="tbl_potong">
+                <ScalarProperty Name="Function" ColumnName="Function" />
+                <ScalarProperty Name="FFunction" ColumnName="FFunction" />
+                <ScalarProperty Name="MuaVu" ColumnName="MuaVu" />
+                <ScalarProperty Name="hisdate" ColumnName="hisdate" />
+                <ScalarProperty Name="POTongMienBac" ColumnName="POTongMienBac" />
+                <ScalarProperty Name="POTongMienNam" ColumnName="POTongMienNam" />
+                <ScalarProperty Name="POTongMienBacInt" ColumnName="POTongMienBacInt" />
+                <ScalarProperty Name="POTongMienNamInt" ColumnName="POTongMienNamInt" />
+                <ScalarProperty Name="POTongToanQuoc" ColumnName="POTongToanQuoc" />
+                <ScalarProperty Name="POTongToanQuocInt" ColumnName="POTongToanQuocInt" />
+                <ScalarProperty Name="GiaTriPOTongToanQuoc" ColumnName="GiaTriPOTongToanQuoc" />
+                <ScalarProperty Name="POQuahan" ColumnName="POQuahan" />
+                <ScalarProperty Name="TonKho" ColumnName="TonKho" />
+                <ScalarProperty Name="Intransit" ColumnName="Intransit" />
+                <ScalarProperty Name="POTongCR" ColumnName="POTongCR" />
+                <ScalarProperty Name="DatThem" ColumnName="DatThem" />
+                <ScalarProperty Name="NgayTonKho" ColumnName="NgayTonKho" />
+                <ScalarProperty Name="sumPOTongMienBac" ColumnName="sumPOTongMienBac" />
+                <ScalarProperty Name="sumPOTongMienNam" ColumnName="sumPOTongMienNam" />
+                <ScalarProperty Name="sumPOTongToanQuoc" ColumnName="sumPOTongToanQuoc" />
+                <ScalarProperty Name="sumGiaTriPOTongToanQuoc" ColumnName="sumGiaTriPOTongToanQuoc" />
+                <ScalarProperty Name="sumTonKho" ColumnName="sumTonKho" />
+                <ScalarProperty Name="sumIntransit" ColumnName="sumIntransit" />
+                <ScalarProperty Name="sumPOTongCR" ColumnName="sumPOTongCR" />
+                <ScalarProperty Name="sumDatThem" ColumnName="sumDatThem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_tmp">
+            <EntityTypeMapping TypeName="DBTHUCTAPModel.tbl_tmp">
+              <MappingFragment StoreEntitySet="tbl_tmp">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

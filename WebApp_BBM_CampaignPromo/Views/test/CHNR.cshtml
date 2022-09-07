@@ -1,0 +1,132 @@
+﻿@model WebApp_BBM_CampaignPromo.Models.Test
+@{
+    ViewBag.Title = "CHNR";
+}
+<div class="text-center">
+    <h2 class="text-primary"> CHIA HÀNG NGOÀI AR TỰ ĐỘNG </h2>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">  
+                <div class="col-md-4">
+                    <label for="ncc">NCC</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="search" list="listMain" name="mainPrd" id="mainPrd" class="form-control" placeholder="----Chọn Tên----" required onchange="fnLoadMain()" />
+                    <datalist id="listMain">
+                        @foreach (var xxx in Model.ListBill)
+                        {
+                            <option value="@xxx.HoVaTen">@xxx.HoVaTen</option>
+                        }
+                    </datalist>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="col-md-4">
+                    <label for="mien">Miền</label>
+                </div>
+                <div class="col-md-8">
+                    <input id="mien" type="text" readonly class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-primary"> Tìm Kiếm</button>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="col-md-4">
+                    <label for="band">Band</label>
+                </div>
+                <div class="col-md-8">
+                    <input id="band" type="text" readonly class="form-control" />
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="col-md-4">
+                    <label for="tinh">Tỉnh</label>
+                </div>
+                <div class="col-md-8">
+                    <input id="tinh" type="text" readonly class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-primary">Trình Duyệt</button>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="col-md-4">
+                    <label for="mahang">Mã hàng</label>
+                </div>
+                <div class="col-md-8">
+                    <input id="mahang" type="text" readonly class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-4">
+                    <label for="cuahang">Cửa hàng</label>
+                </div>
+                <div class="col-md-8">
+                    <input id="cuahang" type="text" readonly class="form-control" />
+                </div>
+            </div><div class="col-md-4">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-4">
+                    <label for="khochia">Kho chia</label>
+                </div>
+                <div class="col-md-8">
+                    <input id="khochia" type="text" readonly class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+        <div class="">
+            <table id="tbkMain" class="table table-striped" border="1">
+                <thead>
+                    <tr>
+                        <th> CH TSF</th>
+                        <th>Tỉnh</th>
+                        <th>Mã CH</th>
+                        <th>Tên CH</th>
+                        <th>Mã hàng</th>
+                        <th>Tên hàng</th>
+                        <th>Ps ERP</th>
+                        <th>DS ERP</th>
+                        <th>Min PSF</th>
+                        <th>SL tồn</th>
+                        <th>Sl bán D-30</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+

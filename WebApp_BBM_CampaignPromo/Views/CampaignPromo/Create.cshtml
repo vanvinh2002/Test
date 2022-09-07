@@ -1,0 +1,277 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <label for="txtId">Mã KM</label>
+                <input id="txtId" type="text" readonly class="form-control" />
+            </div>
+
+            <div class="col-md-4">
+                <label for="txtStoreID">Cửa hàng</label>
+                <input id="txtStoreID" type="text" value="@ViewBag.storeNo" readonly class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label for="txtName">Tên KM</label>
+                <input id="txtName" type="text" class="form-control" />
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <label for="txtFromDate">Ngày bắt đầu</label>
+                <input id="txtFromDate" type="date" class="form-control" />
+            </div>
+
+            <div class="col-md-4">
+                <label for="txtToDate">Ngày kết thúc</label>
+                <input id="txtToDate" type="date" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label for="txtInDay">Ngày áp dụng</label>
+                <select id="txtInDay" multiple="multiple">
+                    <option value="mo">Thứ 2</option>
+                    <option value="tu">Thứ 3</option>
+                    <option value="we">Thứ 4</option>
+                    <option value="th">Thứ 5</option>
+                    <option value="fr">Thứ 6</option>
+                    <option value="sa">Thứ 7</option>
+                    <option value="su">Chủ nhật</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <label for="txtDes">Nội dung KM</label>
+            <input id="txtDes" type="text" class="form-control" />
+        </div>
+
+    </div>
+
+
+    <div class="container">
+        <label>Danh sách sản phẩm</label>
+        <label>điều kiện</label>
+
+        <div>
+            <input type="radio" id="main_or" name="drone" value="or"
+                   checked>
+            <label for="main_or">Hoặc</label>
+        </div>
+
+        <div>
+            <input type="radio" id="main_and" name="drone" value="and">
+            <label for="main_and">Và</label>
+        </div>
+
+        <table id="tbkMain" class="table table-striped" border="1">
+            <thead>
+                <tr>
+                    <th>Mã Items</th>
+                    <th>Tên Items</th>
+                    <th>ĐVT</th>
+                    <th>Giá bán niêm yết</th>
+                    <th>Giá bán KM</th>
+                    <th>Cơ chế KM</th>
+                    <th>SL</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                        <input type="search" list="listMain" name="mainPrd" id="mainPrd" class="form-control" placeholder="----Chọn sản phẩm----" required onchange="fnLoadMain()" />
+                        <datalist id="listMain">
+                            @foreach (var xxx in ViewBag.ls_mainPrd)
+                            {
+                                <option value="@xxx.itemNo">@xxx.itemNo</option>
+                            }
+                        </datalist>
+                    </td>
+                    <td><label id="mainName"></label></td>
+                    <td><label id="mainUoM"></label></td>
+                    <td><label id="mainPrice"></label></td>
+                    <td><label id="mainDisPrice"></label></td>
+                    <td><label id="mainTypeDis"></label></td>
+                    <td><input type="number" class="form-control" id="txtQty" /></td>
+                    <td></td>
+                </tr>
+
+            </tfoot>
+        </table>
+
+<button class="btn-primary" onclick="fnAddMain()">thêm sp</button>;
+
+        <table id="tbkPromo" class="table table-striped" border="1">
+            <thead>
+                <tr>
+                    <th>Mã Items</th>
+                    <th>Tên Items</th>
+                    <th>ĐVT</th>
+                    <th>SL quà tồn</th>
+                    <th>Giá quà tặng</th>
+                    <th>SL</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                        <input type="search" list="listPro" name="proPrd" id="proPrd" class="form-control" placeholder="----Chọn sản phẩm----" required>
+                        <datalist id="listPro">
+                            @foreach (var xxx in ViewBag.ls_promoPrd)
+                            {
+                                <option value="@xxx.itemNo">@xxx.itemNo</option>
+                            }
+                        </datalist>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+
+    });
+
+    function fnLoadMain() {
+        var itemNo = $('#mainPrd').val();
+        if (itemNo.length > 0) {
+
+            var obj = new Object;
+
+            obj.itemNo = itemNo;
+
+            $.ajax({
+                type: "POST",
+                url: "/CampaignPromo/getItem",
+                data: JSON.stringify(obj),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+
+                    console.log(JSON.stringify(r));
+                    if (r != null) {
+
+
+                        $("#mainName").text(r.itemName);
+                        $("#mainUoM").text(r.Uom);
+                        $("#mainPrice").text(r.salePrice);
+                        $("#mainDisPrice").text("-");
+                        $("#mainTypeDis").text("");
+
+                    }
+                }
+            });
+
+            
+        }
+    }
+
+    function fnAddMain(){
+
+        var itemNo = $('#mainPrd').val();
+        var itemName = $("#mainName").text();
+        var mainUoM= $("#mainUoM").text();
+        var mainPrice = $("#mainPrice").text();
+        var mainDisPrice = $("#mainDisPrice").text();
+        var mainTypeDis = $("#mainTypeDis").text();
+        var txtQty = $("#txtQty").val();
+
+        //tabel add row
+
+        //Get the reference of the Table's TBODY element.
+        var tBody = $("#tbkMain > TBODY")[0];
+
+        //Add Row.
+        var row = tBody.insertRow(-1);
+
+        //Add Type cell
+        cell = $(row.insertCell(-1));
+        cell.html(itemNo);
+
+        //Add Type cell
+        cell = $(row.insertCell(-1));
+        cell.html(itemName);
+
+        //Add Type cell
+        cell = $(row.insertCell(-1));
+        cell.html(mainUoM);
+
+        //Add Type cell
+        cell = $(row.insertCell(-1));
+        cell.html(mainPrice);
+
+        //Add Type cell
+        cell = $(row.insertCell(-1));
+        cell.html(mainDisPrice);
+
+
+        //Add Type cell
+        cell = $(row.insertCell(-1));
+        cell.html(mainTypeDis);
+
+        //Add Type cell
+        cell = $(row.insertCell(-1));
+        cell.html(txtQty);
+
+
+        //Add Button cell.
+        cell = $(row.insertCell(-1));
+
+        //var btnRemove = $("<input />");
+        //btnRemove.attr("class", "btn btn-warning");
+        //btnRemove.attr("type", "button");
+        //btnRemove.attr("onclick", "Remove(this);");
+        //btnRemove.val("Xóa");
+
+        cell.append('<p style="text-align:center;"><a href="#"  onclick="RemoveMain(this);" class="btn btn-warning bt_action_delete"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a></p>');
+
+        //Clear the TextBoxes.
+
+        $('#mainPrd').val("");
+        $("#mainName").text("");
+        $("#mainUoM").text("");
+        $("#mainPrice").text("");
+        $("#mainDisPrice").text("");
+        $("#mainTypeDis").text("");
+        $("#txtQty").val("");
+    }
+
+    function RemoveMain(button) {
+        //Determine the reference of the Row using the Button.
+        var row = $(button).closest("TR");
+        var name = $("TD", row).eq(0).html();
+        if (confirm("Xác nhận xóa sản phẩm mã: " + name + " ?")) {
+            //Get the reference of the Table.
+            var table = $("#tbkMain")[0];
+
+            //Delete the Table row using it's Index.
+            table.deleteRow(row[0].rowIndex);
+        }
+    };
+
+
+
+</script>
